@@ -1,4 +1,4 @@
-<?php /*a:1:{s:52:"D:\phpstudy_pro\wz\tp-admin\app\v2\view\v2\index.php";i:1697950541;}*/ ?>
+<?php /*a:1:{s:52:"D:\phpstudy_pro\wz\tp-admin\app\v2\view\v2\index.php";i:1698282999;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,7 +24,8 @@
 </style>
 
 <body>
-    <h1><span style="margin: 20px 10px;">后台管理主页</span><button class="layui-btn" onclick="exit()">退出</button></h1>
+    <h1><span style="margin: 20px 10px;">后台管理主页(token60秒过期)</span><button class="layui-btn" onclick="exit()">退出</button>
+    </h1>
     <div class="layui-form">
         <div class="demo-login-container">
             <div class="layui-form-item">
@@ -63,6 +64,7 @@
         var username = $.trim($('input[name="username"]').val());
         var password = $.trim($('input[name="password"]').val());
 
+
         if (username == '' || password == '') {
             layer.msg('必填项不能为空', {
                 icon: 2
@@ -72,6 +74,14 @@
                 username,
                 password,
             }, function(res) {
+                if (res.status == 10004) {
+                    layer.msg(res.result, {
+                        icon: 2
+                    })
+                    setTimeout(function() {
+                        window.location.href = '/v2/login'
+                    }, 1000);
+                }
                 if (res.status != 200) {
                     layer.msg(res.result, {
                         icon: 2

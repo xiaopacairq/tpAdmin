@@ -11,7 +11,7 @@ class AdminUser
 {
     private $adminUserModel = null;
     private $key = 'srq';
-    private $expTime = 30;
+    private $expTime = 60;
 
     public function __construct()
     {

@@ -19,6 +19,9 @@ class IsLogin
         $isLogin = (!preg_match('/login/', request()->pathinfo()) && !preg_match('/adminlogin/', request()->pathinfo()));
 
         if (empty($token) && $isLogin) {
+            if (request()->isAjax()) {
+                return json(['status' => '10004', 'message' => '执行失败', 'result' => "token不合法，退出登录"]);
+            }
             return redirect('/v2/login');
         }
 
