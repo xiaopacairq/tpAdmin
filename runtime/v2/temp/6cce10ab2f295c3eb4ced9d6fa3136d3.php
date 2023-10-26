@@ -1,4 +1,4 @@
-<?php /*a:1:{s:52:"D:\phpstudy_pro\wz\tp-admin\app\v2\view\v2\index.php";i:1698282999;}*/ ?>
+<?php /*a:1:{s:52:"D:\phpstudy_pro\wz\tp-admin\app\v2\view\v2\index.php";i:1698287894;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,18 +9,18 @@
     <link rel="stylesheet" href="/static/layui/css/layui.css">
 </head>
 <style>
-.demo-login-container {
-    width: 320px;
-    margin: 21px auto 0;
-}
+    .demo-login-container {
+        width: 320px;
+        margin: 21px auto 0;
+    }
 
-.demo-login-other .layui-icon {
-    position: relative;
-    display: inline-block;
-    margin: 0 2px;
-    top: 2px;
-    font-size: 26px;
-}
+    .demo-login-other .layui-icon {
+        position: relative;
+        display: inline-block;
+        margin: 0 2px;
+        top: 2px;
+        font-size: 26px;
+    }
 </style>
 
 <body>
@@ -36,8 +36,7 @@
                     <div class="layui-input-prefix">
                         <i class="layui-icon layui-icon-username"></i>
                     </div>
-                    <input type="text" name="username" value="" lay-verify="required" placeholder="用户名"
-                        lay-reqtext="请填写用户名" autocomplete="off" class="layui-input" lay-affix="clear">
+                    <input type="text" name="username" value="" lay-verify="required" placeholder="用户名" lay-reqtext="请填写用户名" autocomplete="off" class="layui-input" lay-affix="clear">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -45,8 +44,7 @@
                     <div class="layui-input-prefix">
                         <i class="layui-icon layui-icon-password"></i>
                     </div>
-                    <input type="password" name="password" value="" lay-verify="required" placeholder="密   码"
-                        lay-reqtext="请填写密码" autocomplete="off" class="layui-input" lay-affix="eye">
+                    <input type="password" name="password" value="" lay-verify="required" placeholder="密   码" lay-reqtext="请填写密码" autocomplete="off" class="layui-input" lay-affix="eye">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -56,55 +54,55 @@
     </div>
     <script src="/static/layui/layui.js"></script>
     <script>
-    var $ = layui.jquery;
-    var layer = layui.layer;
+        var $ = layui.jquery;
+        var layer = layui.layer;
 
-    // 添加管理员
-    function add() {
-        var username = $.trim($('input[name="username"]').val());
-        var password = $.trim($('input[name="password"]').val());
+        // 添加管理员
+        function add() {
+            var username = $.trim($('input[name="username"]').val());
+            var password = $.trim($('input[name="password"]').val());
 
 
-        if (username == '' || password == '') {
-            layer.msg('必填项不能为空', {
-                icon: 2
-            })
-        } else {
-            $.post('/v2/admin_user/addadminuser', {
-                username,
-                password,
-            }, function(res) {
-                if (res.status == 10004) {
-                    layer.msg(res.result, {
-                        icon: 2
-                    })
-                    setTimeout(function() {
-                        window.location.href = '/v2/login'
-                    }, 1000);
-                }
-                if (res.status != 200) {
-                    layer.msg(res.result, {
-                        icon: 2
-                    })
-                } else {
-                    layer.msg(res.result, {
-                        icon: 1
-                    })
-                    setTimeout(function() {
-                        window.location.href = '/v2/adminindex'
-                    }, 1000);
-                }
-            }, 'json');
+            if (username == '' || password == '') {
+                layer.msg('必填项不能为空', {
+                    icon: 2
+                })
+            } else {
+                $.post('/v2/admin_user/addadminuser', {
+                    username,
+                    password,
+                }, function(res) {
+                    if (res.status == 10004) {
+                        layer.msg(res.result, {
+                            icon: 2
+                        })
+                        setTimeout(function() {
+                            window.location.href = '/v2/login'
+                        }, 1000);
+                    }
+                    if (res.status != 200) {
+                        layer.msg(res.result, {
+                            icon: 2
+                        })
+                    } else {
+                        layer.msg(res.result, {
+                            icon: 1
+                        })
+                        setTimeout(function() {
+                            window.location.href = '/v2/adminindex'
+                        }, 1000);
+                    }
+                }, 'json');
+            }
+
         }
 
-    }
-
-    // 退出登录
-    function exit() {
-        setTimeout(function() {
-            window.location.href = '/v2/admin_user/adminquit'
-        }, 1000);
-    }
+        // 退出登录
+        function exit() {
+            setTimeout(function() {
+                window.location.href = '/v2/admin_user/adminquit'
+            }, 1000);
+        }
     </script>
 </body>
 
