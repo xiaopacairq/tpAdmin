@@ -1,4 +1,4 @@
-<?php /*a:1:{s:55:"D:\phpstudy_pro\wz\tp-admin\app\v3\view\redis\index.php";i:1698289065;}*/ ?>
+<?php /*a:1:{s:55:"D:\phpstudy_pro\wz\tp-admin\app\v3\view\redis\index.php";i:1698293834;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,18 +9,18 @@
     <link rel="stylesheet" href="/static/layui/css/layui.css">
 </head>
 <style>
-.demo-login-container {
-    width: 320px;
-    margin: 21px auto 0;
-}
+    .demo-login-container {
+        width: 320px;
+        margin: 21px auto 0;
+    }
 
-.demo-login-other .layui-icon {
-    position: relative;
-    display: inline-block;
-    margin: 0 2px;
-    top: 2px;
-    font-size: 26px;
-}
+    .demo-login-other .layui-icon {
+        position: relative;
+        display: inline-block;
+        margin: 0 2px;
+        top: 2px;
+        font-size: 26px;
+    }
 </style>
 
 <body>
@@ -30,15 +30,13 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">标题</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="title" value="" lay-verify="required" placeholder="title"
-                        lay-reqtext="请填写标题" autocomplete="off" class="layui-input" lay-affix="clear">
+                    <input type="text" name="title" value="" lay-verify="required" placeholder="title" lay-reqtext="请填写标题" autocomplete="off" class="layui-input" lay-affix="clear">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">热度</label>
                 <div class="layui-input-inline">
-                    <input type="number" name="hot" value="" lay-verify="required" placeholder="hot" lay-reqtext="请填写热度"
-                        autocomplete="off" class="layui-input" lay-affix="number" min="0" step="1">
+                    <input type="number" name="hot" value="" lay-verify="required" placeholder="hot" lay-reqtext="请填写热度" autocomplete="off" class="layui-input" lay-affix="number" min="0" step="1">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -57,51 +55,51 @@
             </thead>
             <tbody>
                 <?php foreach ($res as $k => $v) : ?>
-                <tr>
-                    <td><?= $k + 1 ?></td>
-                    <td><?= $v ?></td>
-                    <td><?php echo app('cache')->zscore('topic_v3',$v); ?></td>
-                </tr>
+                    <tr>
+                        <td><?= $k + 1 ?></td>
+                        <td><?= $v ?></td>
+                        <td><?php echo app('cache')->zscore('topic_v3',$v); ?></td>
+                    </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
     </div>
     <script src="/static/layui/layui.js"></script>
     <script>
-    var $ = layui.jquery;
-    var layer = layui.layer;
+        var $ = layui.jquery;
+        var layer = layui.layer;
 
-    // 添加帖子热度
-    function add() {
-        var title = $.trim($('input[name="title"]').val());
-        var hot = $.trim($('input[name="hot"]').val());
+        // 添加帖子热度
+        function add() {
+            var title = $.trim($('input[name="title"]').val());
+            var hot = $.trim($('input[name="hot"]').val());
 
 
-        if (title == '' || hot == '') {
-            layer.msg('必填项不能为空', {
-                icon: 2
-            })
-        } else {
-            $.post('/v3/redis/add', {
-                title,
-                hot,
-            }, function(res) {
-                if (res.status != 200) {
-                    layer.msg(res.result, {
-                        icon: 2
-                    })
-                } else {
-                    layer.msg(res.result, {
-                        icon: 1
-                    })
-                    setTimeout(function() {
-                        window.location.href = '/v3/redis/index'
-                    }, 1000);
-                }
-            }, 'json');
+            if (title == '' || hot == '') {
+                layer.msg('必填项不能为空', {
+                    icon: 2
+                })
+            } else {
+                $.post('/v3/redis/add', {
+                    title,
+                    hot,
+                }, function(res) {
+                    if (res.status != 200) {
+                        layer.msg(res.result, {
+                            icon: 2
+                        })
+                    } else {
+                        layer.msg(res.result, {
+                            icon: 1
+                        })
+                        setTimeout(function() {
+                            window.location.href = '/v3/redis/index'
+                        }, 1000);
+                    }
+                }, 'json');
+            }
+
         }
-
-    }
     </script>
 </body>
 
